@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="../dist/SpeechToTextJs.min.js"></script>
+	<script type="text/javascript">
+
+		var speecht2text = new SpeechToText(function(){
+			speecht2text.setIsContinous(true);
+			speecht2text.setAllowInterimResults(false);
+			speecht2text.setMaxAlternatives(20);
+
+			var lang = speecht2text.getAllSupportedLanguages();
+			speecht2text.setLanguage((lang[0]).key);  // english
+
+			speecht2text.start();
+
+			setTimeout(function(){
+				speecht2text.stop(function(){
+					console.log(speecht2text.getText());
+				});
+			},5000);
+		});
+
+	</script>
+</head>
+<body >
+Enable the microphone and speak someting :) and after 5 seconds see the console.log
+</body>
+</html>
