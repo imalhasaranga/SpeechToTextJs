@@ -1,6 +1,6 @@
 {
   "name": "speechtotextjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "web speech api based solution for voice to text conversion",
   "main": "index.js",
   "scripts": {
@@ -30,5 +30,4 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-uglify": "^0.11.1"
   }
-
 }
