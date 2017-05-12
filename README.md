@@ -17,7 +17,8 @@ Or linking script files
 <script type="text/javascript" src="../dist/SpeechToTextJs.min.js"></script>
 ```
 
-Sample Code
+###Sample Code
+Please see the `demo` folder for working solution
 
 ```
 
