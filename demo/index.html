@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<script type="text/javascript" src="../src/SpeechToTextJs.js"></script>
+	<script type="text/javascript" src="../dist/SpeechToTextJs.min.js"></script>
 	<script type="text/javascript">
 
 		var speecht2text = new SpeechToText(function(){
@@ -15,11 +15,13 @@
 
 			speecht2text.start();
 
+			speecht2text.onEnd(function () {
+				alert(speecht2text.getText());
+			});
+
 			setTimeout(function(){
-				speecht2text.stop(function(){
-					alert(speecht2text.getText());
-				});
-			},10000);
+				speecht2text.stop();
+			},5000);
 		},function () {
 			alert("Browser Not Supported");
 		});

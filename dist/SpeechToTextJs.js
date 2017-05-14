@@ -34,6 +34,9 @@ var SpeechToText = function(success,error){
              self.recognition.onerror = function(event){
                  self.onerror && self.onerror(event);
              };
+             self.recognition.onend = function () {
+                 self.onEndFunction();
+             };
              self.success && self.success();
         }
     });
@@ -51,6 +54,10 @@ SpeechToText.prototype.onError = function(onError){
     this.onerror = onError;
 };
 
+SpeechToText.prototype.onEnd = function (onEnd) {
+    this.onEndFunction = onEnd;
+};
+
 SpeechToText.prototype.start = function () {
     this.finalTranscript = null;
     this.recognition.lang = this.defLang;
@@ -60,8 +67,7 @@ SpeechToText.prototype.start = function () {
     this.recognition.start();
 };
 
-SpeechToText.prototype.stop = function (onStop) {
-    this.onEndFunction = onStop;
+SpeechToText.prototype.stop = function () {
     this.recognition.stop();
 };
 
@@ -117,7 +123,6 @@ SpeechToText.prototype._createString = function(speechRecognitionResult, resultI
     var transcript = prefix ?  "" + prefix + "" + alternative.transcript.replace(prefix, "") : alternative.transcript;
     this.lastTranscript = alternative.transcript;
     this.finalTranscript = transcript;
-    this.onEndFunction && this.onEndFunction();
 };
 
 
