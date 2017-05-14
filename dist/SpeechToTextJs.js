@@ -27,29 +27,29 @@ var SpeechToText = function(success,error){
             var result = event.results[event.resultIndex];
             self.onresult && self.onresult(event);
             self._createString(result, event.resultIndex);
-        }
+        };
         self.recognition.onerror = function(event){
             self.onerror && self.onerror(event);
-        }
+        };
          if(!self.isSupported()){
             self.error && self.error();
         }else{
             self.success && self.success();
         }
     });
-}
+};
 
 SpeechToText.prototype.isSupported = function () {
     return window.SpeechRecognition != null;
-}
+};
 
 SpeechToText.prototype.onResult = function(onResult){
     this.onresult = onResult;
-}
+};
 
 SpeechToText.prototype.onError = function(onError){
     this.onerror = onError;
-}
+};
 
 SpeechToText.prototype.start = function () {
     this.finalTranscript = null;
@@ -58,37 +58,37 @@ SpeechToText.prototype.start = function () {
     this.recognition.interimResults = this.allowInterimResults;
     this.recognition.maxAlternatives = this.maxAlternatives;
     this.recognition.start();
-}
+};
 
 SpeechToText.prototype.stop = function (onStop) {
     this.recognition.stop();
     this.onEndFunction = onStop;
-}
+};
 
 SpeechToText.prototype.clearText = function(){
     this.finalTranscript = "";
-}
+};
 
 SpeechToText.prototype.getText = function () {
     return this.finalTranscript;
-}
+};
 
 //--------------------------------------------
 SpeechToText.prototype.setIsContinous = function(isContinuous){
     this.isContinuous = isContinuous
-}
+};
 
 SpeechToText.prototype.setAllowInterimResults = function(allowInterimResults){
     this.interimResults = allowInterimResults;
-}
+};
 
 SpeechToText.prototype.setMaxAlternatives = function(maxAlternatives){
     this.maxAlternatives = maxAlternatives;
-}
+};
 
 SpeechToText.prototype.setLanguage = function(lang){
     this.defLang = lang;
-}
+};
 
 //--------------------------------------------
 

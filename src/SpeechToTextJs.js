@@ -22,34 +22,34 @@ var SpeechToText = function(success,error){
 
     var self = this;
     setTimeout(function(){
-        self.recognition = new window.SpeechRecognition();
-        self.recognition.onresult = function(event){
-            var result = event.results[event.resultIndex];
-            self.onresult && self.onresult(event);
-            self._createString(result, event.resultIndex);
-        }
-        self.recognition.onerror = function(event){
-            self.onerror && self.onerror(event);
-        }
-         if(!self.isSupported()){
+        if(!self.isSupported()){
             self.error && self.error();
         }else{
-            self.success && self.success();
+             self.recognition = new window.SpeechRecognition();
+             self.recognition.onresult = function(event){
+                 var result = event.results[event.resultIndex];
+                 self.onresult && self.onresult(event);
+                 self._createString(result, event.resultIndex);
+             };
+             self.recognition.onerror = function(event){
+                 self.onerror && self.onerror(event);
+             };
+             self.success && self.success();
         }
     });
-}
+};
 
 SpeechToText.prototype.isSupported = function () {
     return window.SpeechRecognition != null;
-}
+};
 
 SpeechToText.prototype.onResult = function(onResult){
     this.onresult = onResult;
-}
+};
 
 SpeechToText.prototype.onError = function(onError){
     this.onerror = onError;
-}
+};
 
 SpeechToText.prototype.start = function () {
     this.finalTranscript = null;
@@ -58,37 +58,37 @@ SpeechToText.prototype.start = function () {
     this.recognition.interimResults = this.allowInterimResults;
     this.recognition.maxAlternatives = this.maxAlternatives;
     this.recognition.start();
-}
+};
 
 SpeechToText.prototype.stop = function (onStop) {
-    this.recognition.stop();
     this.onEndFunction = onStop;
-}
+    this.recognition.stop();
+};
 
 SpeechToText.prototype.clearText = function(){
     this.finalTranscript = "";
-}
+};
 
 SpeechToText.prototype.getText = function () {
     return this.finalTranscript;
-}
+};
 
 //--------------------------------------------
 SpeechToText.prototype.setIsContinous = function(isContinuous){
     this.isContinuous = isContinuous
-}
+};
 
 SpeechToText.prototype.setAllowInterimResults = function(allowInterimResults){
     this.interimResults = allowInterimResults;
-}
+};
 
 SpeechToText.prototype.setMaxAlternatives = function(maxAlternatives){
     this.maxAlternatives = maxAlternatives;
-}
+};
 
 SpeechToText.prototype.setLanguage = function(lang){
     this.defLang = lang;
-}
+};
 
 //--------------------------------------------
 
@@ -102,7 +102,7 @@ SpeechToText.prototype.getAllSupportedLanguages = function(){
         {key : "ru", value : "русский" },
         {key : "he", value : "עברית" }
     ];
-}
+};
 
 SpeechToText.prototype._createString = function(speechRecognitionResult, resultIndex){
     for(var i = 0; i < speechRecognitionResult.length; i++){
@@ -117,8 +117,8 @@ SpeechToText.prototype._createString = function(speechRecognitionResult, resultI
     var transcript = prefix ?  "" + prefix + "" + alternative.transcript.replace(prefix, "") : alternative.transcript;
     this.lastTranscript = alternative.transcript;
     this.finalTranscript = transcript;
-    this.onEndFunction();
-}
+    this.onEndFunction && this.onEndFunction();
+};
 
 
 function _commonPrefix(a, b){

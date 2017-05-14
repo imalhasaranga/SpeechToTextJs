@@ -17,24 +17,28 @@ Or linking script files
 <script type="text/javascript" src="../dist/SpeechToTextJs.min.js"></script>
 ```
 
-###Sample Code
+### Sample Code
 Please see the `demo` folder for working solution
 
 ```
 
     var speecht2text = new SpeechToText(function(){
         speecht2text.setIsContinous(true);
-        speecht2text.setAllowInterimResults(false);
+        speecht2text.setAllowInterimResults(true);
         speecht2text.setMaxAlternatives(20);
+
         var lang = speecht2text.getAllSupportedLanguages();
         speecht2text.setLanguage((lang[0]).key);  // english
 
         speecht2text.start();
+
         setTimeout(function(){
             speecht2text.stop(function(){
-                console.log(speecht2text.getText());
+                alert(speecht2text.getText());
             });
-        },5000);
+        },10000);
+    },function () {
+        alert("Browser Not Supported");
     });
 
 ```
