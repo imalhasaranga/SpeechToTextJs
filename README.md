@@ -23,23 +23,25 @@ Please see the `demo` folder for working solution
 ```
 
     var speecht2text = new SpeechToText(function(){
-        speecht2text.setIsContinous(true);
-        speecht2text.setAllowInterimResults(true);
-        speecht2text.setMaxAlternatives(20);
+    			speecht2text.setIsContinous(true);
+    			speecht2text.setAllowInterimResults(true);
+    			speecht2text.setMaxAlternatives(20);
 
-        var lang = speecht2text.getAllSupportedLanguages();
-        speecht2text.setLanguage((lang[0]).key);  // english
+    			var lang = speecht2text.getAllSupportedLanguages();
+    			speecht2text.setLanguage((lang[0]).key);  // english
 
-        speecht2text.start();
+    			speecht2text.start();
 
-        setTimeout(function(){
-            speecht2text.stop(function(){
-                alert(speecht2text.getText());
-            });
-        },10000);
-    },function () {
-        alert("Browser Not Supported");
-    });
+    			speecht2text.onEnd(function () {
+    				alert(speecht2text.getText());
+    			});
+
+    			setTimeout(function(){
+    				speecht2text.stop();
+    			},5000);
+    		},function () {
+    			alert("Browser Not Supported");
+    		});
 
 ```
 
