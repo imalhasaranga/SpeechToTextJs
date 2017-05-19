@@ -24,7 +24,7 @@ Please see the `demo` folder for working solution
 
     var speecht2text = new SpeechToText(function(){
     			speecht2text.setIsContinous(true);
-    			speecht2text.setAllowInterimResults(true);
+    			speecht2text.setAllowInterimResults(false);
     			speecht2text.setMaxAlternatives(20);
 
     			var lang = speecht2text.getAllSupportedLanguages();
